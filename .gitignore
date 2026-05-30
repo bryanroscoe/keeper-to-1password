@@ -1,0 +1,11 @@
+# Never commit credential exports — these contain live passwords and TOTP secrets.
+*.csv
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
