@@ -1,6 +1,10 @@
 # Never commit credential exports — these contain live passwords and TOTP secrets.
 *.csv
 
+# Local-only, one-off splitter: hardcodes real personal data (emails, phones,
+# passwords). Must never be pushed.
+split_logins.py
+
 # Python
 __pycache__/
 *.pyc
