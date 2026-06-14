@@ -1,9 +1,11 @@
 # Never commit credential exports — these contain live passwords and TOTP secrets.
 *.csv
+*.json
 
-# Local-only, one-off splitter: hardcodes real personal data (emails, phones,
-# passwords). Must never be pushed.
-split_logins.py
+# Your real split rules contain personal data (emails, phones, sometimes
+# passwords used as logins). Keep them local. The example is safe to commit.
+split_rules.json
+!split_rules.example.json
 
 # Python
 __pycache__/

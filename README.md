@@ -46,6 +46,38 @@ python3 keeper_to_1password.py my-keeper-export.csv 1password_import.csv
 python3 keeper_to_1password.py --verify-only 1password_import.csv
 ```
 
+## Optional helpers
+
+Two small, dependency-free companion scripts for messier exports:
+
+### `split_keeper_vault.py` — split a shared vault by owner
+
+If a single Keeper vault holds credentials for more than one person (a household
+or a team), this splits the export into one raw Keeper CSV per owner, so each
+person imports only their own items. Classification is rule-based and fully
+transparent — all rules live in an external JSON config, so the script itself
+contains no personal data.
+
+```bash
+cp split_rules.example.json split_rules.json   # then edit for your owners
+python3 split_keeper_vault.py keeper_export.csv --rules split_rules.json
+# -> alice_logins.csv, bob_logins.csv, (other_logins.csv) ...
+```
+
+Your real `split_rules.json` usually contains emails, phone numbers, and
+sometimes passwords used as login values, so it is git-ignored. Each output file
+is itself a valid Keeper export — feed it straight into `keeper_to_1password.py`.
+
+### `fold_to_notes.py` — flatten ragged custom-field columns
+
+Keeper exports have a variable number of trailing custom-field columns. This
+folds every non-empty custom field into the Notes column, producing a clean,
+fixed 6-column file. It verifies losslessly (no non-empty cell is dropped).
+
+```bash
+python3 fold_to_notes.py keeper_export.csv keeper_clean.csv
+```
+
 ## Importing into 1Password
 
 1. Run the script to produce `1password_import.csv`.

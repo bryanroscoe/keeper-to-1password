@@ -1,0 +1,40 @@
+{
+  "_comment": [
+    "Example rules for split_keeper_vault.py. Copy to split_rules.json and edit.",
+    "split_rules.json is git-ignored because a real config usually contains",
+    "emails, phone numbers, and sometimes passwords used as login values.",
+    "",
+    "Keeper CSV column layout: 0 Folder, 1 Title, 2 Login, 3 Password,",
+    "4 Website, 5 Notes, 6+ custom fields. login_index/fallback_indices",
+    "refer to those positions."
+  ],
+
+  "login_index": 2,
+  "fallback_indices": [1, 4, 5],
+
+  "owners": ["alice", "bob"],
+  "default_owner": "alice",
+
+  "routing": {
+    "other": {
+      "domain_hints": ["examplecorp.com"],
+      "exclude_self_hints": ["alice", "bob"]
+    }
+  },
+
+  "device_exact": {
+    "admin": "alice",
+    "user": "alice",
+    "root": "alice"
+  },
+
+  "exact_overrides": {
+    "12345678": "bob",
+    "shared-login@example.com": "alice"
+  },
+
+  "patterns": {
+    "alice": ["alice", "asmith", "alice.smith@"],
+    "bob": ["bob", "bjones", "bob.jones@"]
+  }
+}
